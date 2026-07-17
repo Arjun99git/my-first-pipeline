@@ -1,0 +1,48 @@
+name: Docker Build Test and Package
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  docker-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t my-first-pipeline:${{ github.sha }} .
+
+      - name: Run Docker container
+        run: |
+          docker run -d \
+            --name cicd-web \
+            -p 8080:80 \
+            my-first-pipeline:${{ github.sha }}
+
+      - name: Test website
+        run: |
+          sleep 5
+          curl --fail http://localhost:8080
+          curl --silent http://localhost:8080 |
+            grep "My First CI/CD Docker Project"
+
+      - name: Package Docker image
+        run: |
+          docker save my-first-pipeline:${{ github.sha }} \
+            -o my-first-pipeline-image.tar
+
+      - name: Upload Docker artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-first-pipeline-image
+          path: my-first-pipeline-image.tar
+          retention-days: 7
+
+      - name: Stop container
+        if: always()
+        run: docker rm -f cicd-web || true
