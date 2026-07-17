@@ -1,168 +1,56 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>CI/CD Docker Project</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            min-height: 100vh;
-            font-family: Arial, Helvetica, sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e3a8a);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 900px;
-            text-align: center;
-        }
-
-        .badge {
-            display: inline-block;
-            background: #22c55e;
-            color: #052e16;
-            font-weight: bold;
-            padding: 8px 18px;
-            border-radius: 20px;
-            margin-bottom: 25px;
-        }
-
-        h1 {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        .subtitle {
-            color: #cbd5e1;
-            font-size: 20px;
-            line-height: 1.6;
-            margin-bottom: 35px;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 35px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 25px;
-        }
-
-        .card h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            color: #cbd5e1;
-            line-height: 1.5;
-        }
-
-        .buttons a {
-            display: inline-block;
-            text-decoration: none;
-            padding: 13px 25px;
-            border-radius: 8px;
-            margin: 5px;
-            font-weight: bold;
-        }
-
-        .github {
-            background: white;
-            color: #111827;
-        }
-
-        .actions {
-            background: #2563eb;
-            color: white;
-        }
-
-        footer {
-            margin-top: 40px;
-            color: #94a3b8;
-        }
-
-        @media (max-width: 700px) {
-            h1 {
-                font-size: 34px;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StreamOps Platform</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Arial,sans-serif;background:#070b16;color:#fff;min-height:100vh}
+    nav{display:flex;justify-content:space-between;align-items:center;padding:22px 7%;background:#0b1020;position:sticky;top:0}
+    .logo{font-size:26px;font-weight:800;color:#38bdf8}
+    nav a{color:#cbd5e1;text-decoration:none;margin-left:22px}
+    .hero{padding:90px 7%;background:linear-gradient(120deg,#111827,#172554,#0c4a6e)}
+    .hero span{color:#38bdf8;font-weight:bold}
+    h1{font-size:54px;max-width:750px;margin:15px 0}
+    .hero p{font-size:19px;color:#cbd5e1;max-width:650px;line-height:1.7}
+    .button{display:inline-block;margin-top:25px;padding:13px 23px;border-radius:8px;background:#0284c7;color:#fff;text-decoration:none;font-weight:bold}
+    section{padding:50px 7%}
+    h2{margin-bottom:22px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+    .card{min-height:210px;border-radius:16px;padding:25px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:0 10px 30px #0007;transition:.3s}
+    .card:hover{transform:translateY(-7px)}
+    .one{background:linear-gradient(145deg,#7c3aed,#1e1b4b)}
+    .two{background:linear-gradient(145deg,#0284c7,#082f49)}
+    .three{background:linear-gradient(145deg,#dc2626,#450a0a)}
+    .four{background:linear-gradient(145deg,#059669,#022c22)}
+    .tag{font-size:12px;font-weight:bold;color:#bae6fd;margin-bottom:8px}
+    .card h3{font-size:23px;margin-bottom:8px}
+    .card p{color:#dbeafe;line-height:1.5}
+    .status{margin-top:45px;padding:22px;border:1px solid #1e3a5f;background:#0b1220;border-radius:14px}
+    .green{color:#4ade80;font-weight:bold}
+    footer{text-align:center;padding:35px;color:#94a3b8}
+    @media(max-width:600px){h1{font-size:36px}nav .links{display:none}}
+  </style>
 </head>
-
 <body>
-    <main class="container">
-
-        <div class="badge">✓ Pipeline Passed</div>
-
-        <h1>My First CI/CD Docker Project</h1>
-
-        <p class="subtitle">
-            A containerized Nginx website automatically built, tested,
-            packaged and validated using GitHub Actions.
-        </p>
-
-        <section class="cards">
-            <div class="card">
-                <h2>🐳 Docker</h2>
-                <p>The application runs inside an Nginx Alpine container.</p>
-            </div>
-
-            <div class="card">
-                <h2>⚙️ CI/CD</h2>
-                <p>GitHub Actions automatically builds and tests every push.</p>
-            </div>
-
-            <div class="card">
-                <h2>📦 Artifact</h2>
-                <p>The completed Docker image is packaged as a downloadable artifact.</p>
-            </div>
-        </section>
-
-        <div class="buttons">
-            <a
-                class="github"
-                href="https://github.com/Arjun99git/my-first-pipeline"
-                target="_blank"
-            >
-                View GitHub Repository
-            </a>
-
-            <a
-                class="actions"
-                href="https://github.com/Arjun99git/my-first-pipeline/actions"
-                target="_blank"
-            >
-                View Pipeline
-            </a>
-        </div>
-
-        <footer>
-            Built by Arjun | Docker • GitHub Actions • GitLab CI/CD
-        </footer>
-
-    </main>
+  <nav><div class="logo">StreamOps</div><div class="links"><a href="#shows">Browse</a><a href="#platform">Platform</a><a href="https://github.com/Arjun99git/my-first-pipeline">GitHub</a></div></nav>
+  <header class="hero">
+    <span>SECURE CLOUD-NATIVE STREAMING DEMO</span>
+    <h1>Entertainment delivered through DevSecOps automation.</h1>
+    <p>A streaming-platform demonstration built with Docker, GitHub Actions, GitLab CI/CD, security scanning, GHCR, Kubernetes, Helm and autoscaling.</p>
+    <a class="button" href="#shows">Explore Content</a>
+  </header>
+  <section id="shows">
+    <h2>Featured Content</h2>
+    <div class="grid">
+      <article class="card one"><div class="tag">DEVOPS SERIES</div><h3>Pipeline Masters</h3><p>Build, test, secure and deploy cloud-native applications.</p></article>
+      <article class="card two"><div class="tag">KUBERNETES</div><h3>Cluster Chronicles</h3><p>Scaling workloads with Helm, probes and HPA.</p></article>
+      <article class="card three"><div class="tag">SECURITY</div><h3>Zero-Day Defense</h3><p>Semgrep, Trivy and OWASP ZAP protect every release.</p></article>
+      <article class="card four"><div class="tag">CLOUD NATIVE</div><h3>Container World</h3><p>Immutable images published securely through GHCR.</p></article>
+    </div>
+    <div class="status" id="platform"><span class="green">● PLATFORM HEALTHY</span><p>Two Kubernetes replicas, readiness and liveness probes, Helm release management and CPU-based autoscaling are enabled.</p></div>
+  </section>
+  <footer>StreamOps Platform | My First CI/CD Docker Project | Built by Arjun</footer>
 </body>
 </html>
