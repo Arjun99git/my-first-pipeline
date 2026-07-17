@@ -1,10 +1,168 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My CI/CD Project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CI/CD Docker Project</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #22c55e;
+            color: #052e16;
+            font-weight: bold;
+            padding: 8px 18px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            color: #cbd5e1;
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .buttons a {
+            display: inline-block;
+            text-decoration: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .github {
+            background: white;
+            color: #111827;
+        }
+
+        .actions {
+            background: #2563eb;
+            color: white;
+        }
+
+        footer {
+            margin-top: 40px;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 700px) {
+            h1 {
+                font-size: 34px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>My First CI/CD Docker Project</h1>
-    <p>Built and tested using GitHub Actions and Docker.</p>
+    <main class="container">
+
+        <div class="badge">✓ Pipeline Passed</div>
+
+        <h1>My First CI/CD Docker Project</h1>
+
+        <p class="subtitle">
+            A containerized Nginx website automatically built, tested,
+            packaged and validated using GitHub Actions.
+        </p>
+
+        <section class="cards">
+            <div class="card">
+                <h2>🐳 Docker</h2>
+                <p>The application runs inside an Nginx Alpine container.</p>
+            </div>
+
+            <div class="card">
+                <h2>⚙️ CI/CD</h2>
+                <p>GitHub Actions automatically builds and tests every push.</p>
+            </div>
+
+            <div class="card">
+                <h2>📦 Artifact</h2>
+                <p>The completed Docker image is packaged as a downloadable artifact.</p>
+            </div>
+        </section>
+
+        <div class="buttons">
+            <a
+                class="github"
+                href="https://github.com/Arjun99git/my-first-pipeline"
+                target="_blank"
+            >
+                View GitHub Repository
+            </a>
+
+            <a
+                class="actions"
+                href="https://github.com/Arjun99git/my-first-pipeline/actions"
+                target="_blank"
+            >
+                View Pipeline
+            </a>
+        </div>
+
+        <footer>
+            Built by Arjun | Docker • GitHub Actions • GitLab CI/CD
+        </footer>
+
+    </main>
 </body>
 </html>
