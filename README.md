@@ -1,112 +1,158 @@
-# My first pipeline
-
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/Arjun99git/my-first-pipeline.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-* [Set up project integrations](https://gitlab.com/Arjun99git/my-first-pipeline/-/settings/integrations)
-
-## Collaborate with your team
-
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
-
-## Pipeline Status
+# Production-Style DevSecOps CI/CD and Kubernetes Project
 
 ![Docker Pipeline](https://github.com/Arjun99git/my-first-pipeline/actions/workflows/pipeline.yml/badge.svg)
+![Security Pipeline](https://github.com/Arjun99git/my-first-pipeline/actions/workflows/security.yml/badge.svg)
+![GHCR Pipeline](https://github.com/Arjun99git/my-first-pipeline/actions/workflows/publish-ghcr.yml/badge.svg)
 
-## Project Features
+## Project Overview
 
-- Responsive static website
-- Nginx Alpine Docker container
-- Automated Docker image build
-- Container endpoint testing
-- GitHub Actions CI/CD
+This project demonstrates an end-to-end DevSecOps delivery workflow for a containerized Nginx web application. It integrates automated build, testing, security scanning, container publishing, artifact management, and Kubernetes deployment across GitHub Actions and GitLab CI/CD.
+
+The implementation focuses on secure software delivery, repeatable deployments, application health validation, container traceability, and cross-platform CI/CD automation.
+
+## Architecture
+
+    Developer Commit
+           |
+           v
+    GitHub / GitLab
+           |
+           v
+    CI/CD Pipeline
+           |
+           +--> Application Testing
+           +--> Semgrep SAST
+           +--> Trivy Filesystem Scan
+           +--> Docker Image Build
+           +--> Trivy Image Scan
+           +--> OWASP ZAP DAST
+           +--> Security Reports
+           |
+           v
+    GitHub Container Registry
+           |
+           v
+    Kubernetes / Minikube
+           |
+           +--> Two Application Replicas
+           +--> Kubernetes Service
+           +--> ConfigMap
+           +--> Readiness Probe
+           +--> Liveness Probe
+           +--> Resource Requests and Limits
+           +--> Rolling Deployment
+
+## Technologies
+
+- Git and GitHub
+- GitLab
+- GitHub Actions
 - GitLab CI/CD
-- Downloadable Docker image artifact
+- Docker and Nginx
+- GitHub Container Registry
+- Kubernetes and Minikube
+- Semgrep
+- Trivy
+- OWASP ZAP
+- PowerShell
+
+## DevSecOps Pipeline
+
+The automated delivery workflow performs:
+
+1. Source-code checkout
+2. Application build and endpoint testing
+3. Semgrep static application security testing
+4. Trivy filesystem and configuration scanning
+5. Docker image creation
+6. Trivy container-image vulnerability scanning
+7. OWASP ZAP dynamic application security testing
+8. Security-report and artifact upload
+9. Docker image publishing to GHCR
+10. Immutable image tagging using the Git commit SHA
+
+## Kubernetes Implementation
+
+The application is deployed with:
+
+- Two Nginx replicas
+- Rolling-update deployment strategy
+- Kubernetes ConfigMap
+- NodePort Service
+- Readiness probe for traffic management
+- Liveness probe for automatic recovery
+- CPU and memory requests
+- CPU and memory limits
+- Local Minikube cluster
+
+## Security Controls
+
+| Area | Implementation |
+|---|---|
+| SAST | Semgrep |
+| Filesystem scanning | Trivy |
+| Container scanning | Trivy |
+| DAST | OWASP ZAP |
+| Image registry | GitHub Container Registry |
+| Image traceability | Commit-SHA tags |
+| Supply-chain metadata | SBOM and provenance |
+| Runtime health | Liveness and readiness probes |
+| Resource governance | Kubernetes requests and limits |
+
+## Repository Structure
+
+    my-first-pipeline/
+    ├── .github/workflows/
+    │   ├── pipeline.yml
+    │   ├── security.yml
+    │   └── publish-ghcr.yml
+    ├── k8s/
+    │   ├── app.yaml
+    │   └── configmap.yaml
+    ├── docs/images/
+    │   └── project-preview.png
+    ├── .gitlab-ci.yml
+    ├── Dockerfile
+    ├── index.html
+    └── README.md
 
 ## Project Preview
 
-![CI/CD Docker Project](docs/images/project-preview.png)
+![DevSecOps Project Preview](docs/images/project-preview.png)
 
+## Run Locally with Docker
+
+    docker build -t my-first-pipeline:local .
+    docker run -d --name cicd-web -p 8081:80 my-first-pipeline:local
+
+Open:
+
+    http://localhost:8081
+
+## Deploy to Kubernetes
+
+    minikube start --driver=docker
+    kubectl apply -f k8s/configmap.yaml
+    kubectl apply -f k8s/app.yaml
+    kubectl rollout status deployment/my-first-pipeline
+    kubectl get pods,services
+    minikube service my-first-pipeline
+
+## Engineering Outcomes
+
+- Implemented equivalent DevSecOps workflows in GitHub Actions and GitLab CI/CD.
+- Automated build, application validation, security scanning, and artifact generation.
+- Published immutable Docker images to GitHub Container Registry.
+- Generated SBOM and provenance metadata for container images.
+- Deployed the application to Kubernetes with two replicas.
+- Implemented readiness and liveness probes for reliability and recovery.
+- Added Kubernetes resource requests and limits.
+- Resolved CI configuration, reserved-stage, Docker networking, Kubernetes context, and local-cluster issues.
+
+## Interview Summary
+
+I designed and implemented a production-style DevSecOps delivery workflow for a containerized Nginx application. GitHub Actions and GitLab CI/CD automate application testing, Semgrep SAST, Trivy filesystem and image scanning, and OWASP ZAP DAST. The validated image is published to GitHub Container Registry using immutable commit-SHA tags with SBOM and provenance metadata. I deployed the application to Kubernetes with two replicas, rolling updates, ConfigMaps, resource controls, and liveness and readiness probes.
+
+## Scope
+
+This portfolio project demonstrates senior-level DevOps and DevSecOps concepts. A full enterprise implementation would additionally include managed Kubernetes, Helm, GitOps with Argo CD, centralized secrets management, policy enforcement, TLS ingress, monitoring, alerting, and formal environment promotion.
