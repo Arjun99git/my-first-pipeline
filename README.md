@@ -1,4 +1,4 @@
-# Production-Style DevSecOps CI/CD and Kubernetes Project
+﻿# StreamOps — Secure Cloud-Native Streaming Platform
 
 ![Docker Pipeline](https://github.com/Arjun99git/my-first-pipeline/actions/workflows/pipeline.yml/badge.svg)
 ![Security Pipeline](https://github.com/Arjun99git/my-first-pipeline/actions/workflows/security.yml/badge.svg)
@@ -6,7 +6,7 @@
 
 ## Project Overview
 
-This project demonstrates an end-to-end DevSecOps delivery workflow for a containerized Nginx web application. It integrates automated build, testing, security scanning, container publishing, artifact management, and Kubernetes deployment across GitHub Actions and GitLab CI/CD.
+StreamOps is a secure cloud-native streaming-platform demonstration delivered through an end-to-end DevSecOps workflow. It integrates automated build, testing, security scanning, container publishing, artifact management, and Kubernetes deployment across GitHub Actions and GitLab CI/CD.
 
 The implementation focuses on secure software delivery, repeatable deployments, application health validation, container traceability, and cross-platform CI/CD automation.
 
@@ -102,19 +102,19 @@ The application is deployed with:
 ## Repository Structure
 
     my-first-pipeline/
-    ├── .github/workflows/
-    │   ├── pipeline.yml
-    │   ├── security.yml
-    │   └── publish-ghcr.yml
-    ├── k8s/
-    │   ├── app.yaml
-    │   └── configmap.yaml
-    ├── docs/images/
-    │   └── project-preview.png
-    ├── .gitlab-ci.yml
-    ├── Dockerfile
-    ├── index.html
-    └── README.md
+    â”œâ”€â”€ .github/workflows/
+    â”‚   â”œâ”€â”€ pipeline.yml
+    â”‚   â”œâ”€â”€ security.yml
+    â”‚   â””â”€â”€ publish-ghcr.yml
+    â”œâ”€â”€ k8s/
+    â”‚   â”œâ”€â”€ app.yaml
+    â”‚   â””â”€â”€ configmap.yaml
+    â”œâ”€â”€ docs/images/
+    â”‚   â””â”€â”€ project-preview.png
+    â”œâ”€â”€ .gitlab-ci.yml
+    â”œâ”€â”€ Dockerfile
+    â”œâ”€â”€ index.html
+    â””â”€â”€ README.md
 
 ## Project Preview
 
@@ -156,3 +156,4 @@ I designed and implemented a production-style DevSecOps delivery workflow for a 
 ## Scope
 
 This portfolio project demonstrates senior-level DevOps and DevSecOps concepts. A full enterprise implementation would additionally include managed Kubernetes, Helm, GitOps with Argo CD, centralized secrets management, policy enforcement, TLS ingress, monitoring, alerting, and formal environment promotion.
+
