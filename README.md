@@ -88,7 +88,7 @@ Current Project Status
 
 The project currently uses Kubernetes manifests and Helm for deployment.
 
-Argo CD is not installed or configured in this project. GitOps synchronization can be added later, but it is not required to deploy StreamOps.
+
 
 Purpose
 
@@ -212,8 +212,9 @@ Open:
 I designed and implemented a production-style DevSecOps delivery workflow for a containerized Nginx application. GitHub Actions and GitLab CI/CD automate application testing, Semgrep SAST, Trivy filesystem and image scanning, and OWASP ZAP DAST. The validated image is published to GitHub Container Registry using immutable commit-SHA tags with SBOM and provenance metadata. I deployed the application to Kubernetes with two replicas, rolling updates, ConfigMaps, resource controls, and liveness and readiness probes.
 
 ## Scope
+The scope of the StreamOps project is to design, configure, and deploy a containerized web application using Kubernetes and Helm.
 
-This portfolio project demonstrates senior-level DevOps and DevSecOps concepts. A full enterprise implementation would additionally include managed Kubernetes, Helm, GitOps with Argo CD, centralized secrets management, policy enforcement, TLS ingress, monitoring, alerting, and formal environment promotion.
+The project focuses on creating a repeatable deployment process that can be managed through source control and executed in a local or cloud-based Kubernetes environment.
 
 
 ## Application Preview
