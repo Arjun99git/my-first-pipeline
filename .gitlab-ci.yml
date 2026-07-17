@@ -1,6 +1,13 @@
+stages:
+  - build
+
 create_file:
-  image: alpine
+  stage: build
+  image: alpine:latest
   script:
     - echo "Building ..."
-    - mkdir build
+    - mkdir -p build
     - touch build/somefile.txt
+  artifacts:
+    paths:
+      - build/somefile.txt
