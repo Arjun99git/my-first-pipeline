@@ -1,38 +1,139 @@
-stages:
+﻿stages:
+  - sast
+  - filesystem_scan
   - build
-  - test
-  - package
+  - image_scan
+  - dast
 
-build_file:
+variables:
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: ""
+  IMAGE_NAME: "my-first-pipeline:$CI_COMMIT_SHA"
+
+semgrep_sast:
+  stage: sast
+  image:
+    name: semgrep/semgrep:latest
+    entrypoint: [""]
+  script:
+    - mkdir -p security-reports
+    - semgrep scan --config auto --json --output security-reports/semgrep.json .
+  artifacts:
+    when: always
+    paths:
+      - security-reports/semgrep.json
+    expire_in: 7 days
+
+trivy_filesystem:
+  stage: filesystem_scan
+  image:
+    name: aquasec/trivy:latest
+    entrypoint: [""]
+  script:
+    - mkdir -p security-reports
+    - trivy fs --scanners vuln,misconfig,secret --format json --output security-reports/trivy-filesystem.json .
+  artifacts:
+    when: always
+    paths:
+      - security-reports/trivy-filesystem.json
+    expire_in: 7 days
+
+docker_build:
   stage: build
-  image: alpine:latest
+  image: docker:27-cli
+  services:
+    - name: docker:27-dind
+      alias: docker
   script:
-    - echo "Starting build..."
-    - mkdir -p build
-    - echo "My first GitLab CI/CD pipeline" > build/somefile.txt
-    - cat build/somefile.txt
+    - docker info
+    - docker build -t "$IMAGE_NAME" .
+    - docker save "$IMAGE_NAME" -o my-first-pipeline-image.tar
   artifacts:
     paths:
-      - build/
-    expire_in: 1 week
+      - my-first-pipeline-image.tar
+    expire_in: 7 days
 
-test_file:
-  stage: test
-  image: alpine:latest
+trivy_image:
+  stage: image_scan
+  image:
+    name: aquasec/trivy:latest
+    entrypoint: [""]
+  needs:
+    - job: docker_build
+      artifacts: true
   script:
-    - echo "Testing build output..."
-    - test -f build/somefile.txt
-    - grep -q "My first GitLab CI/CD pipeline" build/somefile.txt
-    - echo "Test passed successfully"
-
-package_file:
-  stage: package
-  image: alpine:latest
-  script:
-    - echo "Packaging build..."
-    - tar -czf my-first-pipeline.tar.gz build/
-    - ls -l my-first-pipeline.tar.gz
+    - mkdir -p security-reports
+    - trivy image --input my-first-pipeline-image.tar --format json --output security-reports/trivy-image.json
   artifacts:
+    when: always
     paths:
-      - my-first-pipeline.tar.gz
-    expire_in: 1 week
+      - security-reports/trivy-image.json
+    expire_in: 7 days
+
+owasp_zap_dast:
+  stage: dast
+  image: docker:27-cli
+  services:
+    - name: docker:27-dind
+      alias: docker
+  needs:
+    - job: docker_build
+      artifacts: true
+
+  before_script:
+    - mkdir -p zap-reports
+
+  script:
+    - docker load -i my-first-pipeline-image.tar
+    - docker network create security-net
+    - docker run -d --name security-web --network security-net "$IMAGE_NAME"
+
+    - |
+      READY=0
+
+      for i in $(seq 1 20); do
+        if docker run --rm \
+          --network security-net \
+          alpine:3.21 \
+          wget -qO- http://security-web:80 > /dev/null; then
+          READY=1
+          echo "Website is ready"
+          break
+        fi
+
+        sleep 2
+      done
+
+      if [ "$READY" -ne 1 ]; then
+        docker logs security-web
+        exit 1
+      fi
+
+    - |
+      set +e
+
+      docker run \
+        --name zap-scan \
+        --network security-net \
+        ghcr.io/zaproxy/zaproxy:stable \
+        zap-baseline.py \
+        -t http://security-web:80 \
+        -r zap-report.html \
+        -J zap-report.json \
+        -I
+
+      ZAP_EXIT=$?
+
+      docker cp zap-scan:/zap/wrk/. zap-reports/ || true
+
+      exit $ZAP_EXIT
+
+  after_script:
+    - docker rm -f zap-scan security-web 2>/dev/null || true
+    - docker network rm security-net 2>/dev/null || true
+
+  artifacts:
+    when: always
+    paths:
+      - zap-reports/
+    expire_in: 7 days
