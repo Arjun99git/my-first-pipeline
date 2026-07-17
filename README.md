@@ -6,10 +6,9 @@
 
 ## Project Overview
 
-StreamOps is a secure cloud-native streaming-platform demonstration delivered through an end-to-end DevSecOps workflow. It integrates automated build, testing, security scanning, container publishing, artifact management, and Kubernetes deployment across GitHub Actions and GitLab CI/CD.
+StreamOps is a containerized application deployment project designed to demonstrate a practical CI/CD and Kubernetes workflow.
 
-The implementation focuses on secure software delivery, repeatable deployments, application health validation, container traceability, and cross-platform CI/CD automation.
-
+The project stores application configuration, Kubernetes manifests, and Helm templates in a GitHub repository. It provides a structured way to build, configure, and deploy the StreamOps application to a Kubernetes cluster.
 ## Architecture
 
     Developer Commit
@@ -42,6 +41,65 @@ The implementation focuses on secure software delivery, repeatable deployments, 
            +--> Resource Requests and Limits
            +--> Rolling Deployment
 
+             Key Features
+StreamOps web application with a home page
+Kubernetes deployment configuration
+Kubernetes Service configuration
+ConfigMap-based application settings
+Helm chart for reusable deployments
+Git-based source control
+Containerized deployment workflow
+Environment-specific configuration support
+Repository Structure
+my-first-pipeline/
+├── docs/
+│   └── images/
+│       └── streamops-home.png
+├── helm/
+│   └── my-first-pipeline/
+│       ├── templates/
+│       ├── Chart.yaml
+│       └── values.yaml
+├── k8s/
+│   ├── configmap.yaml
+│   ├── deployment.yaml
+│   └── service.yaml
+└── README.md
+Deployment Options
+
+StreamOps can be deployed using standard Kubernetes manifests:
+
+kubectl apply -f k8s/
+
+It can also be deployed using Helm:
+
+helm install streamops ./helm/my-first-pipeline
+
+To update an existing Helm deployment:
+
+helm upgrade streamops ./helm/my-first-pipeline
+Application Preview
+StreamOps Home Page
+
+
+
+
+Current Project Status
+
+The project currently uses Kubernetes manifests and Helm for deployment.
+
+Argo CD is not installed or configured in this project. GitOps synchronization can be added later, but it is not required to deploy StreamOps.
+
+Purpose
+
+The purpose of StreamOps is to demonstrate:
+
+application containerization
+Kubernetes resource management
+Helm-based packaging
+configuration management
+Git-based development workflows
+repeatable application deployment
 ## Technologies
 
 - Git and GitHub
