@@ -157,3 +157,11 @@ I designed and implemented a production-style DevSecOps delivery workflow for a 
 
 This portfolio project demonstrates senior-level DevOps and DevSecOps concepts. A full enterprise implementation would additionally include managed Kubernetes, Helm, GitOps with Argo CD, centralized secrets management, policy enforcement, TLS ingress, monitoring, alerting, and formal environment promotion.
 
+
+## Application Preview
+
+### StreamOps Home Page
+![StreamOps Home Page](docs/images/streamops-home.png)
+
+### StreamOps Login Page
+![StreamOps Login Page](docs/images/streamops-login.png)
