@@ -1,9 +1,9 @@
-﻿stages:
+stages:
   - sast
   - filesystem_scan
   - build
   - image_scan
-  - dast
+  - dynamic_scan
 
 variables:
   DOCKER_HOST: "tcp://docker:2375"
@@ -65,7 +65,7 @@ trivy_image:
     expire_in: "7 days"
 
 owasp_zap_dast:
-  stage: dast
+  stage: dynamic_scan
   image: "docker:24.0.5-cli"
   services:
     - "docker:24.0.5-dind"
