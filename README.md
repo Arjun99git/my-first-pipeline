@@ -91,3 +91,22 @@ For open source projects, say how it is licensed.
 
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+
+## Pipeline Status
+
+![Docker Pipeline](https://github.com/Arjun99git/my-first-pipeline/actions/workflows/pipeline.yml/badge.svg)
+
+## Project Features
+
+- Responsive static website
+- Nginx Alpine Docker container
+- Automated Docker image build
+- Container endpoint testing
+- GitHub Actions CI/CD
+- GitLab CI/CD
+- Downloadable Docker image artifact
+
+## Project Preview
+
+![CI/CD Docker Project](docs/images/project-preview.png)
+
