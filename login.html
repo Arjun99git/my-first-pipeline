@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StreamOps Login</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Arial,sans-serif;background:#050816;color:white;min-height:100vh;display:grid;place-items:center;padding:25px}
+    .page{width:100%;max-width:1050px;min-height:620px;display:grid;grid-template-columns:1.2fr .8fr;background:#0b1020;border:1px solid #1e293b;border-radius:22px;overflow:hidden;box-shadow:0 30px 80px #000a}
+    .visual{padding:55px;background:linear-gradient(135deg,#172554,#0c4a6e,#111827);display:flex;flex-direction:column;justify-content:space-between}
+    .logo{font-size:30px;font-weight:900;color:#38bdf8}
+    .visual h1{font-size:50px;line-height:1.05;max-width:520px}
+    .visual p{color:#cbd5e1;font-size:18px;line-height:1.6;max-width:500px}
+    .posters{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+    .poster{height:150px;border-radius:14px;display:flex;align-items:flex-end;padding:14px;font-weight:bold;box-shadow:0 12px 25px #0007}
+    .p1{background:linear-gradient(145deg,#7c3aed,#1e1b4b)}
+    .p2{background:linear-gradient(145deg,#0284c7,#082f49)}
+    .p3{background:linear-gradient(145deg,#dc2626,#450a0a)}
+    .p4{background:linear-gradient(145deg,#059669,#022c22)}
+    .login{padding:55px 45px;display:flex;flex-direction:column;justify-content:center}
+    .login h2{font-size:34px;margin-bottom:10px}
+    .sub{color:#94a3b8;margin-bottom:30px}
+    label{display:block;color:#cbd5e1;margin:18px 0 8px}
+    input{width:100%;padding:14px;border:1px solid #334155;border-radius:9px;background:#111827;color:white;font-size:16px;outline:none}
+    input:focus{border-color:#38bdf8}
+    button{width:100%;margin-top:25px;padding:15px;border:0;border-radius:9px;background:#0284c7;color:white;font-weight:bold;font-size:16px;cursor:pointer}
+    button:hover{background:#0369a1}
+    .demo{margin-top:20px;padding:13px;background:#111827;border-radius:9px;color:#94a3b8;font-size:13px}
+    .back{text-align:center;margin-top:22px;color:#38bdf8;text-decoration:none}
+    @media(max-width:800px){.page{grid-template-columns:1fr}.visual{display:none}.login{padding:45px 30px}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="visual">
+      <div class="logo">StreamOps</div>
+      <div>
+        <h1>Your cloud-native entertainment platform.</h1>
+        <p>Securely delivered with Docker, DevSecOps pipelines, GHCR, Kubernetes, Helm and autoscaling.</p>
+        <div class="posters">
+          <div class="poster p1">Pipeline Masters</div>
+          <div class="poster p2">Cluster Chronicles</div>
+          <div class="poster p3">Zero-Day Defense</div>
+          <div class="poster p4">Container World</div>
+        </div>
+      </div>
+    </section>
+    <section class="login">
+      <h2>Welcome back</h2>
+      <p class="sub">Sign in to continue to StreamOps.</p>
+      <form id="loginForm">
+        <label for="email">Email address</label>
+        <input id="email" type="email" placeholder="user@streamops.demo" required>
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Enter your password" minlength="6" required>
+        <button type="submit">Sign In</button>
+      </form>
+      <div class="demo">Portfolio demonstration only. No credentials are transmitted or stored.</div>
+      <a class="back" href="index.html">← Back to StreamOps</a>
+    </section>
+  </main>
+  <script>
+    document.getElementById("loginForm").addEventListener("submit",function(event){
+      event.preventDefault();
+      alert("Demo login successful");
+      window.location.href="index.html";
+    });
+  </script>
+</body>
+</html>
