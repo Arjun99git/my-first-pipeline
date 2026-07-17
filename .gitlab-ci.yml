@@ -1,13 +1,38 @@
 stages:
   - build
+  - test
+  - package
 
-create_file:
+build_file:
   stage: build
   image: alpine:latest
   script:
-    - echo "Building ..."
+    - echo "Starting build..."
     - mkdir -p build
-    - touch build/somefile.txt
+    - echo "My first GitLab CI/CD pipeline" > build/somefile.txt
+    - cat build/somefile.txt
   artifacts:
     paths:
-      - build/somefile.txt
+      - build/
+    expire_in: 1 week
+
+test_file:
+  stage: test
+  image: alpine:latest
+  script:
+    - echo "Testing build output..."
+    - test -f build/somefile.txt
+    - grep -q "My first GitLab CI/CD pipeline" build/somefile.txt
+    - echo "Test passed successfully"
+
+package_file:
+  stage: package
+  image: alpine:latest
+  script:
+    - echo "Packaging build..."
+    - tar -czf my-first-pipeline.tar.gz build/
+    - ls -l my-first-pipeline.tar.gz
+  artifacts:
+    paths:
+      - my-first-pipeline.tar.gz
+    expire_in: 1 week
